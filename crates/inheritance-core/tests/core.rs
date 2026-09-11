@@ -294,6 +294,7 @@ fn guide_contains_actual_wallet_and_access_requirements() {
         &p.access_guidance,
         "2 of the 3",
         "no automatic release",
+        "compatible wallet software",
     ] {
         assert!(guide.contains(text));
     }

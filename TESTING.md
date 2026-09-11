@@ -1,5 +1,16 @@
 # Validation and device acceptance
 
+## v0.6.1 vendor-neutral wallet guidance
+
+- Removed wallet-vendor-specific positioning from the app, recovery guides,
+  fixtures and documentation. BSMS remains the standard interchange format.
+- Copy names the supported policy boundaries and tells users to compare the
+  complete policy, network and first receive address in compatible wallet software.
+- All 81 core tests, 17 UI contract checks and 116 offscreen layout
+  renders passed. The app also compiled and ran its test target in release mode.
+- No simulator or physical device was used for this copy-only update. Real
+  cross-wallet BSMS import remains a device/user acceptance check.
+
 ## v0.6.0 safety and handover
 
 - 81 core tests and 24 package/UI checks passed, including old-field migration,
@@ -14,7 +25,7 @@
   five-confirmation save route. The debug channel subsequently closed; no second
   simulator was launched. Physical-device and outsider acceptance remain pending.
 - QnA-signed 0.6.0 package validated for Beta 3 and copied byte-for-byte to SD.
-  See DEVICE-SIGNOFF-0.6.0.md for remaining device/Nunchuk/outsider checks.
+  See DEVICE-SIGNOFF-0.6.0.md for remaining device/interoperability/outsider checks.
 
 ## v0.5.1 optional additional instructions
 
@@ -49,7 +60,7 @@
 - Six independently constructed invalid ZIPs (altered guide/wallet, extra member,
   plaintext member, compression and archive comment) were rejected.
 - Password page layout inspected at 480x760; inputs and fixed action fit. No
-  physical device was driven or flashed. Real Nunchuk import remains untested.
+  physical device was driven or flashed. Real wallet-software import remains untested.
 
 ## v0.4.0 encrypted-only backups
 
@@ -73,20 +84,20 @@
 - See `ENCRYPTED-BACKUP.md` for the current device acceptance checklist. Historical
   plaintext-export instructions below do not apply to v0.4.
 
-## v0.3.1 Nunchuk compatibility
+## v0.3.1 BSMS compatibility
 
 - Tested both user-supplied `Aug 27 Test` exports directly from SD, without
   copying public keys into repository fixtures or changing either original.
 - Both describe the same normal 2-of-3 / timelocked inheritance 1-of-3 policy.
 - Compared 100 receive and 100 change scripts per source against the restored
   recovery kit; all matched. BSMS first-address validation and both round trips
-  passed. This is not a transaction-signing or Nunchuk re-import test.
+  passed. This is not a transaction-signing or wallet-software re-import test.
 - Added seven synthetic policy regressions: separate paths, absolute time/height,
   unsupported relative locks, BSMS address/checksum validation, invalid template
   restrictions, reordered signer-card rejection, and per-path completeness with
   recovery-kit round trips. All 68 core tests and 14 package/UI checks passed.
 - Eligibility is never inferred from the device clock. Actual spending and
-  hardware signer support must still be checked in Nunchuk.
+  hardware signer support must still be checked in compatible wallet software.
 
 ## v0.3.0 delivery validation
 
@@ -221,12 +232,12 @@ Use test data first. Never fund the included demo wallet.
    card. Open it, change its name and check the other plan stays unchanged.
 5. Open Plan Review. Try recording without checks: it must refuse. Confirm the
    first three items, record, and expect **Review in 90 days**. Edit and save a
-   field: review date/checks must reset. Nothing should contact Nunchuk.
+   field: review date/checks must reset. Nothing should contact external wallet software.
 6. Read all five Heir Guidance steps. Use the Plan Details menu to export to
    the SD/USB drive. Expect three
    new files sharing a prefix. Open the guide on a computer; restore the JSON
    on the device. Compare the wallet details before adding the restored plan.
-7. Verify the BSMS wallet file imports into your current Nunchuk version and
+7. Verify the BSMS wallet file imports into compatible wallet software and
    both receive/change branches match. This cross-app hardware acceptance is
    **not yet verified**; do not use the POC as your only recovery method.
 8. Cancel deletion, then confirm deletion. Reopen the app: expect the welcome
@@ -235,18 +246,18 @@ Use test data first. Never fund the included demo wallet.
 
 Still requires physical verification: installation, small touch targets,
 long keyboard editing, real USB/SD removal and full-disk errors, camera/text-QR
-scanning, theme changes, and Nunchuk interoperability with a real public export.
+scanning, theme changes, and wallet-software interoperability with a real public export.
 Power-failure behaviour relies on the SDK durable-file guarantees; no fault
 injection or hardware power-cut testing has been performed.
 
 ## Sensible next improvements
 
-- Import actual public exports from several Nunchuk versions and broaden the
+- Import actual public exports from several compatible wallet applications and broaden the
   interoperability fixture corpus before adding further wallet types.
 - Add animated UR wallet-configuration import if the SDK's decoded types can
   be mapped without losing derivation or policy information.
 - Consider a distinct wallet badge or user-selected colour for each plan once
   the multi-plan workflow has passed physical-device testing.
 
-Do not add automatic unlock timers or imply support for Nunchuk service claims
+Do not add automatic unlock timers or imply support for provider-managed inheritance claims
 without the relevant policy/API integration and a separate security review.

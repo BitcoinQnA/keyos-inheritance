@@ -17,7 +17,7 @@ pub const MAX_NOTE: usize = 1600;
 const DAY: u64 = 86400;
 
 // TODO: localize
-const INVALID_WALLET: &str = "Choose a complete public multisig or supported Nunchuk inheritance descriptor/BSMS file. This policy or export is not supported.";
+const INVALID_WALLET: &str = "Choose a complete supported public multisig descriptor or BSMS file. This policy or export is not supported.";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Wallet {
@@ -62,7 +62,7 @@ impl Wallet {
     pub fn signing_rules(&self) -> String {
         match &self.inheritance {
             None => format!("{} of {} signing keys required", self.threshold, self.fingerprints.len()),
-            Some(p) => format!("Normal: {} of {} keys\nInheritance: {} of {} inheritance keys\n{}\nThe normal path remains available. Nunchuk must check blockchain eligibility; this app does not unlock funds.", self.threshold, p.normal_count, p.threshold, self.fingerprints.len() - p.normal_count,
+            Some(p) => format!("Normal: {} of {} keys\nInheritance: {} of {} inheritance keys\n{}\nThe normal path remains available. Compatible wallet software must check blockchain eligibility; this app does not unlock funds.", self.threshold, p.normal_count, p.threshold, self.fingerprints.len() - p.normal_count,
                 if p.after < 500_000_000 { format!("After block height {}", p.after) } else { format!("After Unix time {} ({} UTC date). Eligibility uses blockchain median time, not this device's clock.", p.after, utc_date(Some(p.after as u64))) }),
         }
     }
@@ -445,7 +445,7 @@ impl Plan {
             return self.care_guide(&wallet);
         }
         // TODO: localize
-        Ok(format!("INHERITANCE RECOVERY GUIDE\n\nWallet: {}\nNetwork: {}\nFor: {}\nContact: {}\n\n1. Find {} of the {} signing keys.\nFingerprints: {}\n{}\n\n2. Additional instructions (optional).\n{}\n\n3. Open the official Nunchuk app from https://nunchuk.io. Import the wallet descriptor below. Compare its network and first receive address before continuing.\n\n4. Connect enough supported hardware signers to meet the threshold. Follow Nunchuk's recovery instructions: https://resources.nunchuk.io/wallet-recovery/personal-wallet/\n\n5. Rehearse with the owner first. Never type seed words into a website or share them with support.\n\nMessage:\n{}\n\nFirst receive address:\n{}\n\nWallet descriptor:\n{}\n\nThis kit contains public wallet data and personal guidance. It contains no automatic release mechanism and is not a Nunchuk inheritance-service claim. Required keys must be obtained separately. A review date never changes the wallet's signing rules.\n",
+        Ok(format!("INHERITANCE RECOVERY GUIDE\n\nWallet: {}\nNetwork: {}\nFor: {}\nContact: {}\n\n1. Find {} of the {} signing keys.\nFingerprints: {}\n{}\n\n2. Additional instructions (optional).\n{}\n\n3. Import the wallet configuration below into compatible wallet software, or open the existing matching wallet. Compare its policy, network and first receive address before continuing.\n\n4. Connect enough supported hardware signers to meet the threshold. Follow the recovery instructions for your wallet software.\n\n5. Rehearse with the owner first. Never type seed words into a website or share them with support.\n\nMessage:\n{}\n\nFirst receive address:\n{}\n\nWallet descriptor:\n{}\n\nThis kit contains public wallet data and personal guidance. It contains no automatic release mechanism and is not an inheritance-service claim. Required keys must be obtained separately. A review date never changes the wallet's signing rules.\n",
             self.wallet_name, wallet.network, self.heir, self.contact, wallet.threshold,
             wallet.fingerprints.len(), wallet.fingerprints.join(", "), self.key_guidance,
             self.access_guidance, self.message, wallet.first_address, wallet.descriptor))

@@ -191,7 +191,7 @@ fn new_kit_roundtrips_with_actionable_guide() {
         "Access: Ask",
         "[ ]",
         "master seed",
-        "not a Nunchuk",
+        "not an inheritance-service",
     ] {
         assert!(guide.contains(text), "{text}");
     }

@@ -37,8 +37,8 @@ Use test data only. Do not move bitcoin or enter seed words, device PINs or real
 
 - Open Heir Guidance, then Open Recovery Guide. Follow all five pages, forwards and backwards. Empty optional messages must not appear as missing required information.
 - Check key names, roles, fingerprints, locations and access instructions on their separate cards. Scroll long content to the end.
-- Import your Nunchuk inheritance BSMS and descriptor exports as well. Compare normal/inheritance thresholds, key roles, timelock and first address with Nunchuk. Normal and inheritance keys must not be counted together.
-- Confirm the app says Nunchuk must check blockchain eligibility. A displayed date must not imply that this app can unlock funds.
+- Import inheritance BSMS and descriptor exports from compatible wallet software as well. Compare normal/inheritance thresholds, key roles, timelock and first address with the source wallet. Normal and inheritance keys must not be counted together.
+- Confirm the app says compatible wallet software must check blockchain eligibility. A displayed date must not imply that this app can unlock funds.
 
 ## 6. Encrypted backup and restore
 
@@ -47,7 +47,7 @@ Use test data only. Do not move bitcoin or enter seed words, device PINs or real
 - On a computer, use an AES-256 ZIP-compatible application to open it. Check `recovery-guide.txt`, `wallet.bsms` and `plan.json` are present and correspond to the selected plan. Extract only to a private test folder; extracted contents are plaintext.
 - Restore Plan in the app: a wrong password must fail without adding a plan. The right password should show a preview before saving.
 - Restore as a separate plan. Original plans must remain unchanged, and imported review/practice/export assurances must reset.
-- Import the decrypted `wallet.bsms` into Nunchuk and compare the network and first receive address. Do not send funds. The encrypted ZIP itself is not a Nunchuk wallet file.
+- Import the decrypted `wallet.bsms` into compatible wallet software and compare the policy, network and first receive address. Do not send funds. The encrypted ZIP itself is not a wallet file.
 - Try a damaged ZIP and an unrelated text file. Expect a clear error and no new or overwritten plan.
 
 ## 7. Multiple plans, deletion and layout

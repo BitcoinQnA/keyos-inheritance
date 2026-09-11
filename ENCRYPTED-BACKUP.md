@@ -5,7 +5,7 @@
 One AES-256-encrypted ZIP containing exactly three files:
 
 - `recovery-guide.txt`: readable recovery instructions and wallet details.
-- `wallet.bsms`: public wallet configuration for Nunchuk.
+- `wallet.bsms`: standard public wallet configuration for compatible software.
 - `plan.json`: structured plan for restoring in Inheritance.
 
 All three file contents are encrypted. The app builds and encrypts in memory,
@@ -20,15 +20,15 @@ the operating system's default ZIP opener supports AES encryption.
 
 1. Open the ZIP and enter the separate export password.
 2. Read `recovery-guide.txt` in any text editor.
-3. Import `wallet.bsms` into Nunchuk, or open the matching existing wallet.
+3. Import `wallet.bsms` into compatible wallet software, or open the matching existing wallet.
 4. Compare the network, first address and signing policy before proceeding.
 
-The ZIP itself cannot be imported directly into Nunchuk. The heir still needs
+The ZIP itself is not a wallet file. The heir still needs
 the actual signing keys; this guide cannot unlock funds or establish timelock
-eligibility. Nunchuk and the blockchain determine that.
+eligibility. Compatible wallet software must determine that from the blockchain.
 
 macOS libarchive decryption and Python pyzipper interoperability were tested.
-GUI archive applications and real Nunchuk re-import remain device/user acceptance
+GUI archive applications and real wallet-software re-import remain device/user acceptance
 checks, not claims of completed testing.
 
 **Deliberate extraction creates readable files on that computer.** Use a trusted
@@ -90,7 +90,7 @@ Use a demo plan and a new test password, never real wallet secrets.
 8. Reopen the app: successful export status persists.
 9. Disconnect the destination during export: no success or plaintext leak.
 10. Check password keyboard Done, scrolling and responsiveness on hardware.
-11. Import the decrypted wallet.bsms in Nunchuk and compare the full policy,
+11. Import the decrypted wallet.bsms in compatible wallet software and compare the full policy,
     network and addresses. Do not send funds merely to test this POC.
 
 Sources: [WinZip AES specification](https://www.winzip.com/en/support/aes-encryption/),

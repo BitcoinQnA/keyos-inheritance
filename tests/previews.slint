@@ -32,7 +32,7 @@ export component Preview inherits Window {
         View.handover-checks = [false, true, false, false];
         View.handover-status = "1 of 4 arrangements confirmed";
         View.rehearsal-title = "Check the wallet together";
-        View.rehearsal-body = "Open the public wallet configuration in Nunchuk. Compare its network and first receive address with this plan. This is your confirmation, not proof of recoverability.";
+        View.rehearsal-body = "Open the public wallet configuration in compatible wallet software. Compare its policy, network and first receive address with this plan. This is your confirmation, not proof of recoverability.";
         View.signer-names = ["Home Passport", "Executor backup", "Third key"];
         View.signer-summaries = ["4BA43603\nLocation and access recorded", "8DFC9B34\nInstructions needed", "56C4FAC3\nInstructions needed"];
         View.signer-fingerprint = "4BA43603";
@@ -59,7 +59,7 @@ export component Preview inherits Window {
         View.guide-title = "Find the signing keys";
         View.guide-step = 1;
         View.guide-headings = ["Normal access", "Inheritance access", "When inheritance is available", "Home signing device"];
-        View.guide-details = ["Use 2 of 3 normal keys. This path remains available before and after the inheritance timelock.", "Use 1 of 3 inheritance keys once the timelock is satisfied.", "Timelock date: 2026-09-26 UTC.\n\nEligibility uses blockchain median time, not this device's clock.\n\nNunchuk must check blockchain eligibility. This app does not unlock funds.", "Normal key\nFingerprint: 4BA43603\n\nLocation\nHome safe\n\nHow to access\nAsk the trusted contact for the separate instructions."];
+        View.guide-details = ["Use 2 of 3 normal keys. This path remains available before and after the inheritance timelock.", "Use 1 of 3 inheritance keys once the timelock is satisfied.", "Timelock date: 2026-09-26 UTC.\n\nEligibility uses blockchain median time, not this device's clock.\n\nCompatible wallet software must check blockchain eligibility. This app does not unlock funds.", "Normal key\nFingerprint: 4BA43603\n\nLocation\nHome safe\n\nHow to access\nAsk the trusted contact for the separate instructions."];
         View.rehearsal-key-headings = View.guide-headings;
         View.rehearsal-key-details = View.guide-details;
     }

@@ -17,9 +17,9 @@ Match their fingerprints.
 2. Additional instructions (optional).
 A copy of this kit is with Sam. Arrange access to two signers using our separately stored instructions. No passwords are included here.
 
-3. Open the official Nunchuk app from https://nunchuk.io. Import the wallet descriptor below. Compare its network and first receive address before continuing.
+3. Import the wallet configuration below into compatible wallet software, or open the existing matching wallet. Compare its policy, network and first receive address before continuing.
 
-4. Connect enough supported hardware signers to meet the threshold. Follow Nunchuk's recovery instructions: https://resources.nunchuk.io/wallet-recovery/personal-wallet/
+4. Connect enough supported hardware signers to meet the threshold. Follow the recovery instructions for your wallet software.
 
 5. Rehearse with the owner first. Never type seed words into a website or share them with support.
 
@@ -32,4 +32,4 @@ tb1qzvy8jvxw0rrqlll4xdugvwt54qcawncjgr4ecq9dc9w6azz6c0nqcnf2uh
 Wallet descriptor:
 wsh(sortedmulti(2,[4ba43603]tpubD6NzVbkrYhZ4Wgf68pWWfTRzdXMoepBvepfiAKtNoE7RvbAbWVfWzQxH1jbkfNk3iJ9zR65Yw6u3B2QZzpkMSTN4y8Lfm1t44HbpZX7efhZ/<0;1>/*,[8dfc9b34]tpubD6NzVbkrYhZ4Y3qD9tjwWFRv4AdyPdscx4wKXiywhgTXUeytmGtsEMiSJaXs9kqyYdPaKQv9tir5J2cDg2Fm3vaudETvLADYLLY4Vb7kMU4/<0;1>/*,[56c4fac3]tpubD6NzVbkrYhZ4XAhKE5b3VVtF4kipaPAEwhcF7e54zMkPoGh5C5rZFnpV4PMfB8gHhgqEK6hQZynZWbQWLiR2hhMohdfoBSzxG6NfD8F58rE/<0;1>/*))#xwnjd3zs
 
-This kit contains public wallet data and personal guidance. It contains no automatic release mechanism and is not a Nunchuk inheritance-service claim. Required keys must be obtained separately. A review date never changes the wallet's signing rules.
+This kit contains public wallet data and personal guidance. It contains no automatic release mechanism and is not an inheritance-service claim. Required keys must be obtained separately. A review date never changes the wallet's signing rules.

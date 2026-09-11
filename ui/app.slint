@@ -144,8 +144,8 @@ export component AppContent inherits Rectangle {
                 // TODO: localize
                 if View.page == 1: VerticalLayout {
                     spacing: 16px;
-                    InfoCard { heading: "Start with your wallet export"; body: "In Nunchuk, export the wallet configuration as a BSMS file or public descriptor. Choose the exported file, or scan a QR containing the public descriptor."; }
-                    BodyText { text: "Supports native SegWit multisig and Nunchuk two-path inheritance wallets, with up to 5 keys per path. This does not activate a Nunchuk inheritance service."; color: Theme.palette-muted; }
+                    InfoCard { heading: "Start with your wallet export"; body: "Export the wallet configuration from compatible wallet software as a BSMS file or public descriptor. Choose the exported file, or scan a QR containing the public descriptor."; }
+                    BodyText { text: "Supports native SegWit multisig and recognised two-path timelocked inheritance wallets, with up to 5 keys per path. It does not activate an inheritance service."; color: Theme.palette-muted; }
                     BodyText { text: "Never import seed words or private keys."; }
                 }
                 // TODO: localize
@@ -155,7 +155,7 @@ export component AppContent inherits Rectangle {
                     InfoCard { heading: View.page == 8 ? View.wallet-name : "Check this wallet"; body: View.wallet-summary; }
                     InfoCard { heading: "Signing key fingerprints"; body: View.fingerprints; }
                     InfoCard { heading: "First receive address"; body: View.address; }
-                    BodyText { text: View.page == 8 ? "This adds a separate plan. Existing plans stay unchanged. Compare with a trusted copy; review and practice records will be reset." : "Compare with Nunchuk before continuing. These are imported public details; the app has not checked possession of any key."; }
+                    BodyText { text: View.page == 8 ? "This adds a separate plan. Existing plans stay unchanged. Compare with a trusted copy; review and practice records will be reset." : "Compare these public details with your wallet software. This app has not checked any signing key."; }
                 }
                 // TODO: localize
                 if View.page == 3: VerticalLayout {
@@ -241,9 +241,9 @@ export component AppContent inherits Rectangle {
                 // TODO: localize
                 if View.page == 9: VerticalLayout {
                     spacing: 12px;
-                    InfoCard { heading: "Inheritance · 0.6.0"; body: "An internal proof of concept built with the Foundation SDK. Save up to 20 separate recovery plans."; }
+                    InfoCard { heading: "Inheritance · 0.6.1"; body: "An internal proof of concept built with the Foundation SDK. Save up to 20 separate recovery plans."; }
                     InfoCard { heading: "Your wallet stays in your control"; body: "This app cannot access the device's master seed, sign transactions, or change your wallet's rules. Only public wallet configurations are accepted."; }
-                    InfoCard { heading: "A recovery companion"; body: "This app explains supported wallet policies. It does not create or activate a Nunchuk service plan, check blockchain eligibility or unlock funds."; }
+                    InfoCard { heading: "A recovery companion"; body: "This app explains supported wallet policies. It does not create or activate an inheritance service, check blockchain eligibility or unlock funds."; }
                     InfoCard { heading: "Keep a separate copy"; body: "The plan is saved in this app's encrypted device storage. Device loss or loss of access can make it unavailable. Export an encrypted backup. Arrange separately how your heir will obtain its password."; }
                 }
                 // TODO: localize
@@ -284,7 +284,7 @@ export component AppContent inherits Rectangle {
                 // TODO: localize
                 if View.page == 14: VerticalLayout {
                     spacing: 12px;
-                    InfoCard { heading: "Key identity"; body: View.signer-fingerprint + "\nMatch the fingerprint and derivation path with Nunchuk and the signing device. Naming a key does not verify possession."; }
+                    InfoCard { heading: "Key identity"; body: View.signer-fingerprint + "\nMatch the fingerprint and derivation path with your wallet software and the signing device. Naming a key does not verify possession."; }
                     for label[index] in ["Friendly name", "Custodian or location", "Separate access arrangements"]: PlanRow {
                         heading: label; detail: View.signer-fields[index] == "" ? "Tap to add" : View.signer-fields[index]; clicked => { Actions.edit-signer(index); }
                     }
@@ -293,7 +293,7 @@ export component AppContent inherits Rectangle {
                 if View.page == 15: VerticalLayout {
                     spacing: 20px;
                     InfoCard { heading: View.wallet-name; body: View.heir + "\n\n" + View.wallet-summary; }
-                    InfoCard { heading: "A clear path to follow"; body: "Read the instructions, locate the required keys and use the official Nunchuk app. You do not need to edit the plan to follow it."; }
+                    InfoCard { heading: "A clear path to follow"; body: "Read the instructions, locate the required keys and use compatible wallet software. You do not need to edit the plan to follow it."; }
                     BodyText { text: "This is a simplified view, not a lock or access restriction. This app cannot unlock funds. The signing keys are still required."; color: Theme.palette-muted; }
                 }
                 // TODO: localize
@@ -309,7 +309,7 @@ export component AppContent inherits Rectangle {
                             body: View.rehearsal-key-details[index];
                         }
                     }
-                    if View.rehearsal-step == 2: InfoCard { heading: "Compare with Nunchuk"; body: View.wallet-summary + "\n" + View.address; }
+                    if View.rehearsal-step == 2: InfoCard { heading: "Compare with your wallet"; body: View.wallet-summary + "\n" + View.address; }
                 }
                 // TODO: localize
                 if View.page == 17: VerticalLayout {

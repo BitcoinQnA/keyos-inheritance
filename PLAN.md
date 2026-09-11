@@ -17,10 +17,11 @@
    Reuse an existing instance; close and verify all three before replacement.
 
 No new network, seed, signing or hardware permissions. Physical recovery and
-Nunchuk interoperability remain device acceptance tests, not automated claims.
+wallet-software interoperability remain device acceptance tests, not automated claims.
 
-Build a standalone Foundation SDK 1.0.0 app inspired by the public Nunchuk
-Inheritance prototype. This is an internal POC, not an official Nunchuk service.
+Build a standalone Foundation SDK 1.0.0 app for organising recovery instructions
+around supported public multisig wallet configurations. This is an internal POC,
+not a wallet or inheritance service.
 
 ## Product contract
 
@@ -36,7 +37,7 @@ Inheritance prototype. This is an internal POC, not an official Nunchuk service.
   different device with validation and an explicit add-plan confirmation.
 - Confirm deletion of the selected plan; cancel must preserve every plan.
 - Migrate legacy single-plan storage without losing any fields or review state.
-- No master-seed access, signing, online Nunchuk API, automatic claims or
+- No master-seed access, signing, online wallet API, automatic claims or
   secure-element proof-of-life claims. Advanced Miniscript policies are rejected
   rather than described as ordinary multisig.
 

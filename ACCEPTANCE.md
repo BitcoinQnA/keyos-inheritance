@@ -43,6 +43,6 @@ This is an app installer, not a firmware image.
     tapping outside. Check light and dark themes and the software keyboard.
 
 For an actual wallet, independently compare the imported public configuration
-with Nunchuk and rehearse using the real signing devices. Physical touch,
+with compatible wallet software and rehearse using the real signing devices. Physical touch,
 removable-drive failures and cross-wallet recovery cannot be proven by simulator
 tests. Keep a separate backup; do not rely solely on this internal POC.

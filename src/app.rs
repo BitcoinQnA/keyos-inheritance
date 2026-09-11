@@ -1000,7 +1000,7 @@ fn rehearsal_view(ui: &AppWindow, state: &State, step: i32) {
         ][step as usize]
             .into(),
     );
-    v.set_rehearsal_body(["On a separate computer, open the encrypted backup and read recovery-guide.txt. Can your heir identify the plan and trusted contact without coaching? Do not put its password in this plan.", "Together, locate enough distinct signing keys for your chosen path using the instructions below. A device and its backup count as one key. Do not enter seeds or move funds.", "Import wallet.bsms from the decrypted backup into Nunchuk. Compare the network and first receive address below. No transaction is needed. This app cannot verify your actions.", "Can your heir obtain the backup password through the separate arrangement, without relying on information inside the locked backup? Never record the password here.", "Suppose the device, one backup copy or your first contact is unavailable. Walk through an alternative route. Extra copies improve availability but increase exposure. Mark this unfinished if no workable alternative exists."][step as usize].into());
+    v.set_rehearsal_body(["On a separate computer, open the encrypted backup and read recovery-guide.txt. Can your heir identify the plan and trusted contact without coaching? Do not put its password in this plan.", "Together, locate enough distinct signing keys for your chosen path using the instructions below. A device and its backup count as one key. Do not enter seeds or move funds.", "Import wallet.bsms from the decrypted backup into compatible wallet software, or open the existing matching wallet. Compare the network and first receive address below. No transaction is needed. This app cannot verify your actions.", "Can your heir obtain the backup password through the separate arrangement, without relying on information inside the locked backup? Never record the password here.", "Suppose the device, one backup copy or your first contact is unavailable. Walk through an alternative route. Extra copies improve availability but increase exposure. Mark this unfinished if no workable alternative exists."][step as usize].into());
 }
 
 fn signing_key_cards(p: &Plan, w: &inheritance_core::Wallet) -> Vec<(String, String)> {
@@ -1029,7 +1029,7 @@ fn signing_key_cards(p: &Plan, w: &inheritance_core::Wallet) -> Vec<(String, Str
         } else {
             format!("Timelock date: {} UTC.\n\nEligibility uses blockchain median time, not this device's clock.", inheritance_core::utc_date(Some(policy.after as u64)))
         };
-        cards.push(("When inheritance is available".into(), format!("{lock}\n\nNunchuk must check blockchain eligibility. This app does not unlock funds.")));
+        cards.push(("When inheritance is available".into(), format!("{lock}\n\nCompatible wallet software must check blockchain eligibility. This app does not unlock funds.")));
     } else {
         cards.push(("Keys required".into(), w.signing_rules()));
     }
@@ -1075,7 +1075,7 @@ fn guide(ui: &AppWindow, state: &State, step: i32) {
         "Start here",
         "Find the signing keys",
         "Additional instructions",
-        "Open the wallet in Nunchuk",
+        "Open the wallet",
         "Before you rely on this plan",
     ][step as usize];
     let v = ui.global::<View>();
@@ -1101,12 +1101,12 @@ fn guide(ui: &AppWindow, state: &State, step: i32) {
                 "Open your plan".into(),
                 "Open the recovery ZIP with an AES-compatible archive tool and its separate password. Read recovery-guide.txt. You can also restore the ZIP in Inheritance.".into(),
             ));
-            cards.push(("Open Nunchuk".into(), "Import wallet.bsms from the decrypted archive, or open your existing matching wallet. The encrypted ZIP itself cannot be imported into Nunchuk.".into()));
+            cards.push(("Open compatible wallet software".into(), "Import wallet.bsms from the decrypted archive, or open your existing matching wallet. The encrypted ZIP itself is not a wallet file. Your wallet software must support the complete policy.".into()));
             cards.push(("Compare wallet details".into(), format!("Network: {}\n\nFirst receive address\n{}\n\nCheck these match before continuing.", w.network, w.first_address)));
         }
         _ => {
-            cards.push(("Next steps".into(), "Use the required signing keys and follow Nunchuk's recovery instructions. If a key or instruction is missing, stop and contact the trusted person.".into()));
-            cards.push(("Check the wallet".into(), "Confirm the wallet details match Nunchuk. Check the network and first receive address before using the wallet. This app cannot confirm recovery will succeed.".into()));
+            cards.push(("Next steps".into(), "Use the required signing keys and follow the recovery instructions for your wallet software. If a key or instruction is missing, stop and contact the trusted person.".into()));
+            cards.push(("Check the wallet".into(), "Confirm the wallet details match your trusted wallet software. Check the policy, network and first receive address before using the wallet. This app cannot confirm recovery will succeed.".into()));
             cards.push((
                 "Keep secrets separate".into(),
                 "Never enter seed words on a website or share them with support.".into(),

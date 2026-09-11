@@ -31,6 +31,8 @@ class UiContractTests(unittest.TestCase):
         self.assertNotIn('open the separate kit', app)
         self.assertNotIn('missing(&p.message)', app)
         self.assertIn('if !p.message.trim().is_empty()', app)
+        self.assertIn('compatible wallet software', source)
+        self.assertIn('compatible wallet software', app)
 
     def test_checks_share_one_entry_and_status_rows_are_actionable(self):
         source = (ROOT / "ui/app.slint").read_text()

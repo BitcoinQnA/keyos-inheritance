@@ -38,7 +38,7 @@ pub fn plan() -> Plan {
     p.heir = "Alex Rivera".into();
     p.contact = "Sam — sam@example.com".into();
     p.message = "We practised this together. Take your time and ask Sam for help.".into();
-    p.key_guidance = "Demo only. Signer 1: home safe. Signer 2: separate backup held by Sam. Signer 3: Alex's device. Match their fingerprints.".into();
+    p.key_guidance = "Demo only:\n• Signer 1: home safe.\n• Signer 2: separate backup held by Sam.\n• Signer 3: Alex's device.\n\nMatch their fingerprints.".into();
     p.access_guidance = "A copy of this kit is with Sam. Arrange access to two signers using our separately stored instructions. No passwords are included here.".into();
     p
 }
