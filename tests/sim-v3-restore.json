@@ -1,0 +1,1 @@
+[{"tap":[240,674]},{"wait":500},{"screenshot":"target/v3-open-existing.png"},{"tap":[52,78]},{"wait":500},{"screenshot":"target/v3-still-two-plans.png"},{"tap":[430,78]},{"wait":500},{"tap":[220,135]},{"wait":700},{"tap":[220,350]},{"wait":500},{"swipe":[220,690,220,345]},{"wait":500},{"screenshot":"target/v3-restore-file-picker.png"}]

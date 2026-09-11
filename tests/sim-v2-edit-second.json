@@ -1,0 +1,12 @@
+[
+  {"tap":[350,226]}, {"wait":600},
+  {"input_text":" - Second"}, {"wait":500},
+  {"tap":[430,78]}, {"wait":400},
+  {"tap":[240,746]}, {"wait":500},
+  {"screenshot":"target/v2-second-saved.png"},
+  {"tap":[52,78]}, {"wait":400},
+  {"screenshot":"target/v2-plans-isolated.png"},
+  {"tap":[220,355]}, {"wait":400},
+  {"tap":[240,500]}, {"wait":400},
+  {"screenshot":"target/v2-second-checklist.png"}
+]

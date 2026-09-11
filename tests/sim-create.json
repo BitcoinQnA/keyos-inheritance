@@ -1,0 +1,15 @@
+[
+  {"tap":[240,746]}, {"wait":500},
+  {"tap":[240,674]}, {"wait":600},
+  {"tap":[225,350]}, {"wait":500},
+  {"tap":[225,486]}, {"wait":700},
+  {"screenshot":"target/sim-wallet.png"},
+  {"tap":[240,746]}, {"wait":500},
+  {"tap":[220,210]}, {"wait":500},
+  {"tap":[220,450]}, {"wait":700},
+  {"input_text":"Demo Family Vault"}, {"wait":500},
+  {"tap":[428,78]}, {"wait":600},
+  {"screenshot":"target/sim-field-saved.png"},
+  {"tap":[240,746]}, {"wait":600},
+  {"screenshot":"target/sim-plan-saved.png"}
+]

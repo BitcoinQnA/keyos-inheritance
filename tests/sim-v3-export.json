@@ -1,0 +1,1 @@
+[{"tap":[220,135]},{"wait":500},{"tap":[240,746]},{"wait":500},{"tap":[220,350]},{"wait":500},{"screenshot":"target/v3-export-folder.png"}]

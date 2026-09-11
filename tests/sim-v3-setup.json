@@ -1,0 +1,1 @@
+[{"tap":[220,240]},{"wait":500},{"screenshot":"target/v3-detail.png"},{"tap":[220,460]},{"wait":500},{"screenshot":"target/v3-setup.png"}]

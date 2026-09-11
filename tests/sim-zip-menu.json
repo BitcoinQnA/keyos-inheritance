@@ -1,0 +1,5 @@
+[
+  {"tap":[220,240]}, {"wait":700},
+  {"tap":[435,78]}, {"wait":700},
+  {"screenshot":"target/zip-final-menu.png"}
+]

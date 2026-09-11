@@ -1,0 +1,22 @@
+[
+  {"tap":[230,240]}, {"wait":300},
+  {"tap":[230,345]}, {"wait":300},
+  {"tap":[230,450]}, {"wait":300},
+  {"tap":[230,555]}, {"wait":300},
+  {"tap":[240,746]}, {"wait":500},
+  {"screenshot":"target/v2-reviewed-second.png"},
+  {"tap":[52,78]}, {"wait":400},
+  {"screenshot":"target/v2-independent-reviews.png"},
+  {"tap":[220,220]}, {"wait":400},
+  {"tap":[220,500]}, {"wait":400},
+  {"screenshot":"target/v2-first-checklist-untouched.png"},
+  {"tap":[52,78]}, {"wait":300},
+  {"tap":[52,78]}, {"wait":300},
+  {"tap":[220,355]}, {"wait":400},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,140]}, {"wait":400},
+  {"tap":[240,746]}, {"wait":500},
+  {"tap":[225,350]}, {"wait":400},
+  {"tap":[240,739]}, {"wait":900},
+  {"screenshot":"target/v2-second-exported.png"}
+]

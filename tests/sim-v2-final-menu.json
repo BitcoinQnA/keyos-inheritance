@@ -1,0 +1,35 @@
+[
+  {
+    "tap": [
+      220,
+      580
+    ]
+  },
+  {
+    "wait": 600
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 600
+  },
+  {
+    "screenshot": "target/v2-detail-menu-final.png"
+  },
+  {
+    "tap": [
+      220,
+      202
+    ]
+  },
+  {
+    "wait": 600
+  },
+  {
+    "screenshot": "target/v2-delete-third-confirm.png"
+  }
+]

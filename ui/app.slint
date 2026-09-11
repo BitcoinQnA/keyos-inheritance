@@ -1,0 +1,395 @@
+import { Theme, UISize, Images, ControlSize, ButtonVariant } from "@ui/theme.slint";
+import { Button } from "@ui/button.slint";
+import { Input } from "@ui/input.slint";
+import { TextArea } from "@ui/textarea.slint";
+import { Card } from "@ui/card.slint";
+import { CardTheme } from "@theme/card_theme.slint";
+import { Menu } from "@ui/menu.slint";
+import { MenuItem } from "@ui/menu_item.slint";
+import { View, Actions } from "globals.slint";
+export { Theme, Images, View, Actions }
+
+export component BodyText inherits Text {
+    color: Theme.palette-foreground;
+    font-family: Theme.font-primary;
+    font-size: Theme.font-size-md;
+    wrap: word-wrap;
+}
+export component InfoCard inherits Rectangle {
+    in property <string> heading;
+    in property <string> body;
+    background: Theme.palette-card;
+    border-color: Theme.palette-border;
+    border-width: 1px;
+    border-radius: CardTheme.size().border-radius;
+    height: content.preferred-height;
+    vertical-stretch: 0;
+    content := VerticalLayout {
+        padding: CardTheme.size().card-padding;
+        spacing: 8px;
+        BodyText { text: root.heading; font-size: Theme.font-size-title; font-weight: 600; }
+        BodyText { text: root.body; }
+    }
+}
+export component ActionButton inherits Button {
+    size: ControlSize.md;
+    full-width: true;
+    height: self.preferred-height;
+    vertical-stretch: 0;
+}
+export component PlanRow inherits Rectangle {
+    in property <string> heading;
+    in property <string> detail;
+    callback clicked();
+    height: max(82px, content.preferred-height);
+    vertical-stretch: 0;
+    background: touch.pressed ? Theme.palette-secondary : Theme.palette-card;
+    border-radius: 16px;
+    border-color: Theme.palette-border;
+    border-width: 1px;
+    content := HorizontalLayout {
+        padding: 16px;
+        spacing: 10px;
+        VerticalLayout {
+            spacing: 5px;
+            BodyText { text: root.heading; font-size: Theme.font-size-title; font-weight: 600; }
+            BodyText { text: root.detail; color: Theme.palette-muted; font-size: Theme.font-size-sm; }
+        }
+        Text { text: "\u{203a}"; font-size: 28px; color: Theme.palette-foreground; vertical-alignment: center; width: 20px; }
+    }
+    touch := TouchArea { clicked => { root.clicked(); } }
+}
+
+export component AppContent inherits Rectangle {
+    in property <length> top-inset: UISize.control-center-status-bar-height;
+    background: Theme.palette-background;
+    in-out property <bool> menu-open: false;
+    property <int> current-page: View.page;
+    changed current-page => { scroll.viewport-y = 0px; root.menu-open = false; }
+    property <int> setup-step: View.setup-step;
+    changed setup-step => { scroll.viewport-y = 0px; }
+    property <int> rehearsal-step: View.rehearsal-step;
+    changed rehearsal-step => { scroll.viewport-y = 0px; }
+    property <int> guide-step: View.guide-step;
+    changed guide-step => { scroll.viewport-y = 0px; }
+    callback finish-edit();
+    finish-edit => { focus-reset.focus(); Actions.save-field(); }
+    focus-reset := FocusScope { width: 0px; height: 0px; }
+    VerticalLayout {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: root.top-inset + 12px;
+        padding-bottom: 24px;
+        spacing: 12px;
+        HorizontalLayout {
+            height: 52px;
+            vertical-stretch: 0;
+            Rectangle {
+                width: 56px;
+                if View.page != 0: Text { text: "\u{2039}"; font-size: 34px; color: Theme.palette-foreground; vertical-alignment: center; }
+                TouchArea { enabled: View.page != 0; clicked => { focus-reset.focus(); Actions.back(); } }
+            }
+            BodyText { text: View.title; font-size: Theme.font-size-title; font-weight: 600; horizontal-alignment: center; vertical-alignment: center; }
+            Rectangle {
+                width: 56px;
+                if View.page == 0 || View.page == 11: Image { source: Images.icon("ellipsis", 28px); colorize: Theme.palette-foreground; width: 28px; height: 28px; x: 20px; y: 12px; }
+                TouchArea { enabled: View.page == 0 || View.page == 11; clicked => { root.menu-open = !root.menu-open; } }
+            }
+        }
+        if View.error != "": BodyText { text: View.error; color: Theme.palette-danger; font-size: 17px; }
+        if View.notice != "": BodyText { text: View.notice; color: Theme.palette-primary; font-size: 17px; }
+        scroll := Flickable {
+            vertical-stretch: 1;
+            viewport-width: self.width;
+            viewport-height: max(self.height, content.preferred-height);
+            content := VerticalLayout {
+                x: 0px;
+                y: 0px;
+                width: parent.width;
+                height: self.preferred-height;
+                alignment: start;
+                spacing: 12px;
+                // TODO: localize
+                if View.page == 0 && !View.has-plan: VerticalLayout {
+                    spacing: 18px;
+                    BodyText { text: "Leave a clear path for the people you trust."; font-size: 28px; font-weight: 600; }
+                    InfoCard { heading: "A recovery-planning companion"; body: "Organise instructions for an existing wallet. This is not an inheritance service. The plan can reveal where keys are held: record only what your heir needs."; }
+                    BodyText { text: "Your family still needs the required signing keys. This app never unlocks or transfers bitcoin."; color: Theme.palette-muted; font-size: 18px; }
+                }
+                if View.page == 0 && View.has-plan: VerticalLayout {
+                    spacing: 12px;
+                    // TODO: localize
+                    BodyText { text: "Choose a plan to review or share."; color: Theme.palette-muted; }
+                    for name[index] in View.plan-names: Card {
+                        body: name + "\n" + View.plan-summaries[index];
+                        font-size: Theme.font-size-lg;
+                        interactive: true;
+                        height: self.preferred-height;
+                        vertical-stretch: 0;
+                        clicked => { Actions.select-plan(index); }
+                    }
+                }
+                if View.page == 11: VerticalLayout {
+                    spacing: 20px;
+                    InfoCard { heading: View.wallet-name; body: View.heir + "\n\n" + View.wallet-summary + "\n\n" + View.revision; }
+                    BodyText { text: View.export-status; color: Theme.palette-primary; }
+                    // TODO: localize
+                    Menu {
+                        full-width: true;
+                        vertical-stretch: 0;
+                        MenuItem { label: View.complete ? "Edit Plan" : "Continue Setup"; end-icon: Images.icon("pencil", 24px); clicked => { Actions.go(12); } }
+                        MenuItem { label: "Check Your Plan"; end-icon: Images.icon("clipboard", 24px); divider: false; clicked => { Actions.go(17); } }
+                    }
+                }
+                // TODO: localize
+                if View.page == 1: VerticalLayout {
+                    spacing: 16px;
+                    InfoCard { heading: "Start with your wallet export"; body: "In Nunchuk, export the wallet configuration as a BSMS file or public descriptor. Choose the exported file, or scan a QR containing the public descriptor."; }
+                    BodyText { text: "Supports native SegWit multisig and Nunchuk two-path inheritance wallets, with up to 5 keys per path. This does not activate a Nunchuk inheritance service."; color: Theme.palette-muted; }
+                    BodyText { text: "Never import seed words or private keys."; }
+                }
+                // TODO: localize
+                if View.page == 2 || View.page == 8: VerticalLayout {
+                    spacing: 12px;
+                    if View.duplicate: InfoCard { heading: "This wallet already has a plan"; body: View.duplicate-name + "\nOpen the existing plan, or deliberately create another. Nothing will be overwritten."; }
+                    InfoCard { heading: View.page == 8 ? View.wallet-name : "Check this wallet"; body: View.wallet-summary; }
+                    InfoCard { heading: "Signing key fingerprints"; body: View.fingerprints; }
+                    InfoCard { heading: "First receive address"; body: View.address; }
+                    BodyText { text: View.page == 8 ? "This adds a separate plan. Existing plans stay unchanged. Compare with a trusted copy; review and practice records will be reset." : "Compare with Nunchuk before continuing. These are imported public details; the app has not checked possession of any key."; }
+                }
+                // TODO: localize
+                if View.page == 3: VerticalLayout {
+                    spacing: 10px;
+                    BodyText { text: "Use locations and instructions. Do not enter seed words, passwords or device PINs."; font-size: 17px; color: Theme.palette-muted; }
+                    for label[index] in ["Plan name", "Heir name", "Trusted contact", "Personal message", "Where to find the keys", "Additional instructions (optional)"]: PlanRow {
+                        heading: label; detail: View.fields[index] == "" ? "Tap to add" : "Tap to edit";
+                        clicked => { Actions.edit(index); }
+                    }
+                    PlanRow { heading: "Review every " + View.review-days + " days"; detail: "Tap to change: 30 / 90 / 180 / 365"; clicked => { Actions.interval(); } }
+                }
+                if View.page == 4: FocusScope {
+                    // The system keyboard sends Return for Done, even for multiline fields.
+                    capture-key-pressed(event) => {
+                        if event.text == Key.Return && !event.modifiers.shift {
+                            focus-reset.focus();
+                            return accept;
+                        }
+                        return reject;
+                    }
+                    VerticalLayout {
+                    spacing: 14px;
+                    BodyText { text: View.field-help; color: Theme.palette-muted; font-size: 18px; }
+                    if !View.field-multiline: Input { value <=> View.edit-value; label: View.title; size: ControlSize.md; submitted(value) => { root.finish-edit(); } }
+                    if View.field-multiline: TextArea { value <=> View.edit-value; label: View.title; min-rows: 4; max-rows: 5; disable-autosize: true; }
+                    }
+                }
+                // TODO: localize
+                if View.page == 5: VerticalLayout {
+                    spacing: 12px;
+                    BodyText { text: "What changed? Check contacts, devices and access arrangements. Update the plan first if needed. Leaving without recording keeps the previous review."; color: Theme.palette-muted; font-size: 18px; }
+                    for label[index] in ["Key contacts or locations are up to date", "Access instructions are up to date", "An encrypted backup is available"]: PlanRow {
+                        heading: label;
+                        detail: View.checks[index] ? "Confirmed — tap to undo" : "Not checked — tap to confirm";
+                        clicked => { Actions.check(index); }
+                    }
+                    BodyText { text: View.status; font-weight: 600; }
+                    BodyText { text: "This records your details check, not a practice recovery. It cannot change your wallet or notify anyone."; font-size: 17px; color: Theme.palette-muted; }
+                }
+                if View.page == 6: VerticalLayout {
+                    spacing: 20px;
+                    alignment: start;
+                    HorizontalLayout {
+                        alignment: center;
+                        // Embed the vectors to avoid enlarging the shared icon atlas.
+                        Image {
+                            source: [@image-url("icons/guide-user.svg"), @image-url("icons/guide-lock.svg"), @image-url("icons/guide-unlock.svg"), @image-url("icons/guide-download.svg"), @image-url("icons/guide-check.svg")][View.guide-step];
+                            colorize: Theme.palette-primary;
+                            width: 56px;
+                            height: 56px;
+                        }
+                    }
+                    // TODO: localize
+                    BodyText { text: "Step " + (View.guide-step + 1) + " of 5"; color: Theme.palette-primary; horizontal-alignment: center; }
+                    BodyText { text: View.guide-title; font-size: Theme.font-size-title; font-weight: 600; horizontal-alignment: center; }
+                    for heading[index] in View.guide-headings: InfoCard {
+                        heading: heading;
+                        body: View.guide-details[index];
+                    }
+                }
+                // TODO: localize
+                if View.page == 7: VerticalLayout {
+                    spacing: 16px;
+                    InfoCard { heading: "Encrypted recovery ZIP"; body: "Anyone who decrypts this ZIP can read the plan and key references. Share only with intended recipients. Open with an AES-256 ZIP app, or restore here."; }
+                    BodyText { text: "Use five or more random words, at least 20 characters. Someone with the file can try guessing its password offline. Never use your device PIN. Keep the password separate; there is no reset."; font-size: 18px; color: Theme.palette-muted; }
+                    FocusScope {
+                        capture-key-pressed(event) => { if event.text == Key.Return { focus-reset.focus(); return accept; } return reject; }
+                        VerticalLayout {
+                            spacing: 12px;
+                            Input { value <=> View.backup-password; label: "Backup password"; input-type: password; disabled: View.crypto-busy; }
+                            Input { value <=> View.backup-confirmation; label: "Confirm password"; input-type: password; disabled: View.crypto-busy; }
+                        }
+                    }
+                }
+                if View.page == 18: VerticalLayout {
+                    spacing: 16px;
+                    InfoCard { heading: "Enter the backup password"; body: "This is the password chosen when exporting, not your device PIN. There is no password reset. The original file will not be changed."; }
+                    FocusScope {
+                        capture-key-pressed(event) => { if event.text == Key.Return { focus-reset.focus(); return accept; } return reject; }
+                        Input { width: 100%; value <=> View.backup-password; label: "Backup password"; input-type: password; disabled: View.crypto-busy; }
+                    }
+                }
+                // TODO: localize
+                if View.page == 9: VerticalLayout {
+                    spacing: 12px;
+                    InfoCard { heading: "Inheritance · 0.6.0"; body: "An internal proof of concept built with the Foundation SDK. Save up to 20 separate recovery plans."; }
+                    InfoCard { heading: "Your wallet stays in your control"; body: "This app cannot access the device's master seed, sign transactions, or change your wallet's rules. Only public wallet configurations are accepted."; }
+                    InfoCard { heading: "A recovery companion"; body: "This app explains supported wallet policies. It does not create or activate a Nunchuk service plan, check blockchain eligibility or unlock funds."; }
+                    InfoCard { heading: "Keep a separate copy"; body: "The plan is saved in this app's encrypted device storage. Device loss or loss of access can make it unavailable. Export an encrypted backup. Arrange separately how your heir will obtain its password."; }
+                }
+                // TODO: localize
+                if View.page == 10: InfoCard {
+                    heading: "Delete " + View.wallet-name + "?";
+                    body: "Only this plan will be removed. Other plans, your wallet and signing keys are unaffected. Exported copies remain wherever you saved them.";
+                }
+                // TODO: localize
+                if View.page == 12: VerticalLayout {
+                    spacing: 12px;
+                    BodyText { text: "Step " + (View.setup-step + 1) + " of 5"; horizontal-alignment: center; color: Theme.palette-primary; }
+                    InfoCard {
+                        heading: ["Name this plan", "Describe the signing keys", "Who is this for?", "Additional instructions", "Check your plan"][View.setup-step];
+                        body: ["Use a name your family will recognise. You can save an incomplete plan and continue later.", "For each key, name a custodian or give a minimal location reference. Keep unlocking credentials separate. Your heir needs enough distinct keys.", "Name your heir and someone they can contact for help. A personal message is optional.", "Add any extra guidance, or leave this blank. Locations and access instructions are already recorded for each signing key.", "These checks find missing details, not missing physical keys. They cannot guarantee recovery."][View.setup-step];
+                    }
+                    if View.setup-step == 0: PlanRow { heading: "Plan name"; detail: View.fields[0] == "" ? "Tap to add" : View.fields[0]; clicked => { Actions.edit(0); } }
+                    if View.setup-step == 0: InfoCard { heading: "Imported wallet"; body: View.wallet-summary; }
+                    if View.setup-step == 1: PlanRow { heading: "Your Signing Keys"; detail: "Names, fingerprints, locations and access"; clicked => { Actions.go(13); } }
+                    if View.setup-step == 1 && View.fields[4] != "": InfoCard { heading: "Existing key notes"; body: View.fields[4]; }
+                    if View.setup-step == 1: PlanRow { heading: "Additional key notes"; detail: "Optional; existing notes are preserved"; clicked => { Actions.edit(4); } }
+                    if View.setup-step == 2: VerticalLayout {
+                        spacing: 12px;
+                        for label[index] in ["Heir name", "Trusted contact", "Personal message"]: PlanRow {
+                            heading: label; detail: View.fields[index + 1] == "" ? "Tap to add" : View.fields[index + 1]; clicked => { Actions.edit(index + 1); }
+                        }
+                    }
+                    if View.setup-step == 3: PlanRow { heading: "Additional instructions (optional)"; detail: View.fields[5] == "" ? "Optional — tap to add" : View.fields[5]; clicked => { Actions.edit(5); } }
+                    if View.setup-step == 3: PlanRow { heading: "Review every " + View.review-days + " days"; detail: "An in-app reminder, not a notification"; clicked => { Actions.interval(); } }
+                    if View.setup-step == 4: InfoCard { heading: View.complete ? "Information entered" : "Details still needed"; body: View.completeness; }
+                    if View.setup-step == 4: BodyText { text: "After saving, export an encrypted backup and check that your heir can open it."; }
+                }
+                // TODO: localize
+                if View.page == 13: VerticalLayout {
+                    spacing: 12px;
+                    BodyText { text: "These are the signing keys in your wallet. A device and its seed backup count as one key, not two."; color: Theme.palette-muted; }
+                    for name[index] in View.signer-names: PlanRow { heading: name; detail: View.signer-summaries[index]; clicked => { Actions.select-signer(index); } }
+                }
+                // TODO: localize
+                if View.page == 14: VerticalLayout {
+                    spacing: 12px;
+                    InfoCard { heading: "Key identity"; body: View.signer-fingerprint + "\nMatch the fingerprint and derivation path with Nunchuk and the signing device. Naming a key does not verify possession."; }
+                    for label[index] in ["Friendly name", "Custodian or location", "Separate access arrangements"]: PlanRow {
+                        heading: label; detail: View.signer-fields[index] == "" ? "Tap to add" : View.signer-fields[index]; clicked => { Actions.edit-signer(index); }
+                    }
+                }
+                // TODO: localize
+                if View.page == 15: VerticalLayout {
+                    spacing: 20px;
+                    InfoCard { heading: View.wallet-name; body: View.heir + "\n\n" + View.wallet-summary; }
+                    InfoCard { heading: "A clear path to follow"; body: "Read the instructions, locate the required keys and use the official Nunchuk app. You do not need to edit the plan to follow it."; }
+                    BodyText { text: "This is a simplified view, not a lock or access restriction. This app cannot unlock funds. The signing keys are still required."; color: Theme.palette-muted; }
+                }
+                // TODO: localize
+                if View.page == 16: VerticalLayout {
+                    spacing: 20px;
+                    HorizontalLayout { alignment: center; Image { source: @image-url("icons/guide-user.svg"); colorize: Theme.palette-primary; width: 56px; height: 56px; } }
+                    BodyText { text: "Step " + (View.rehearsal-step + 1) + " of 5"; color: Theme.palette-primary; horizontal-alignment: center; }
+                    InfoCard { heading: View.rehearsal-title; body: View.rehearsal-body; }
+                    if View.rehearsal-step == 1: VerticalLayout {
+                        spacing: 16px;
+                        for heading[index] in View.rehearsal-key-headings: InfoCard {
+                            heading: heading;
+                            body: View.rehearsal-key-details[index];
+                        }
+                    }
+                    if View.rehearsal-step == 2: InfoCard { heading: "Compare with Nunchuk"; body: View.wallet-summary + "\n" + View.address; }
+                }
+                // TODO: localize
+                if View.page == 17: VerticalLayout {
+                    spacing: 16px;
+                    InfoCard { heading: View.complete ? "Information entered" : "Details still needed"; body: View.completeness; }
+                    InfoCard { heading: "Encrypted backup"; body: View.export-status; }
+                    PlanRow { heading: "Handover Arrangements"; detail: View.handover-status; clicked => { Actions.go(19); } }
+                    PlanRow { heading: "Review Details"; detail: View.status + "\nCheck that your instructions are up to date."; clicked => { Actions.go(5); } }
+                    PlanRow { heading: "Practise with Your Heir (optional)"; detail: View.rehearsal-status + "\nWalk through the plan together without moving funds."; clicked => { Actions.go(16); } }
+                }
+                // TODO: localize
+                if View.page == 19: VerticalLayout {
+                    spacing: 16px;
+                    InfoCard { heading: "Avoid a locked-plan dead end"; body: "Your heir needs a way to start outside this app. Confirm arrangements, not passwords or PINs. You can save unfinished checks."; }
+                    for label[index] in ["My heir knows this plan exists", "They can obtain the device or a backup", "Credentials are available separately", "There is an alternative if a route fails"]: PlanRow {
+                        heading: label;
+                        detail: View.handover-checks[index] ? "Confirmed - tap to undo" : "Not arranged - tap to confirm";
+                        clicked => { Actions.handover-check(index); }
+                    }
+                    InfoCard { heading: "Keep the roadmap limited"; body: "Use a trusted contact or reference where possible. Do not put every key location and its unlocking secrets together. Extra copies help with loss but increase exposure."; }
+                }
+            }
+        }
+        // TODO: localize
+        VerticalLayout {
+            height: self.preferred-height;
+            vertical-stretch: 0;
+            spacing: 12px;
+            if View.page == 0: ActionButton { text: "Create a Plan"; clicked => { Actions.go(1); } }
+            if View.page == 11: ActionButton { text: "Heir Guidance"; clicked => { Actions.go(15); } }
+            if View.page == 1: ActionButton { text: "Scan Wallet QR"; variant: ButtonVariant.secondary; clicked => { Actions.import-wallet(true); } }
+            if View.page == 1: ActionButton { text: "Choose Wallet File"; clicked => { Actions.import-wallet(false); } }
+            if View.page == 2: ActionButton { text: View.duplicate ? "Create Separate Plan" : "Use This Wallet"; variant: View.duplicate ? ButtonVariant.secondary : ButtonVariant.primary; clicked => { Actions.accept-wallet(); } }
+            if View.page == 3: ActionButton { text: "Save Plan"; clicked => { Actions.save-plan(); } }
+            if View.page == 4: ActionButton { text: "Done"; clicked => { root.finish-edit(); } }
+            if View.page == 5: ActionButton { text: "Record Plan Review"; disabled: !View.checks[0] || !View.checks[1] || !View.checks[2]; clicked => { Actions.review(); } }
+            if View.page == 6: ActionButton { text: View.guide-step == 4 ? "Finish Guidance" : "Next"; clicked => { Actions.next-step(); } }
+            if View.page == 7: ActionButton { text: "Encrypt and Export"; clicked => { focus-reset.focus(); Actions.export-kit(); } }
+            if View.page == 18: ActionButton { text: "Unlock Backup"; clicked => { focus-reset.focus(); Actions.unlock-backup(); } }
+            if View.page == 19: ActionButton { text: "Save Arrangements"; clicked => { Actions.handover-save(); } }
+            if View.page == 8: ActionButton { text: "Cancel"; variant: ButtonVariant.secondary; clicked => { Actions.go(0); } }
+            if View.page == 8: ActionButton { text: View.duplicate ? "Restore Separate Plan" : "Restore This Plan"; variant: View.duplicate ? ButtonVariant.secondary : ButtonVariant.primary; clicked => { Actions.restore(); } }
+            if (View.page == 2 || View.page == 8) && View.duplicate: ActionButton { text: "Open Existing Plan"; clicked => { Actions.open-existing(); } }
+            if View.page == 12: ActionButton { text: View.setup-step == 4 ? "Save Plan" : "Save and Finish Later"; variant: View.setup-step == 4 ? ButtonVariant.primary : ButtonVariant.secondary; clicked => { Actions.save-plan(); } }
+            if View.page == 12 && View.setup-step < 4: ActionButton { text: "Continue"; clicked => { Actions.setup-next(); } }
+            if View.page == 13 || View.page == 14: ActionButton { text: "Done"; clicked => { Actions.back(); } }
+            if View.page == 15: ActionButton { text: "Open Recovery Guide"; clicked => { Actions.go(6); } }
+            if View.page == 16: ActionButton { text: View.rehearsal-confirmed ? "Confirmed Together — Undo" : "Confirm This Step Together"; variant: ButtonVariant.secondary; clicked => { Actions.rehearsal-confirm(); } }
+            if View.page == 16: ActionButton { text: View.rehearsal-step == 4 ? "Save Practice Result" : (View.rehearsal-confirmed ? "Next" : "Skip Unfinished Step"); clicked => { Actions.rehearsal-next(); } }
+            if View.page == 17 && !View.complete: ActionButton { text: "Fix Missing Details"; clicked => { Actions.go(12); } }
+            if View.page == 17 && View.complete: ActionButton { text: View.export-current ? "Export Encrypted Backup" : "Export Updated Backup"; clicked => { Actions.go(7); } }
+            if View.page == 10: ActionButton { text: "Delete Plan"; variant: ButtonVariant.danger; clicked => { Actions.delete(); } }
+            if View.page == 10: ActionButton { text: "Cancel"; variant: ButtonVariant.secondary; clicked => { Actions.go(11); } }
+        }
+    }
+    if View.crypto-busy: Rectangle {
+        background: Theme.palette-background;
+        BodyText { text: View.page == 7 ? "Encrypting backup…\nThis can take a moment." : "Unlocking backup…\nThis can take a moment."; width: parent.width - 48px; x: 24px; y: (parent.height - self.height) / 2; horizontal-alignment: center; }
+        TouchArea { }
+    }
+    if root.menu-open: Rectangle {
+        background: #0009;
+        TouchArea { clicked => { root.menu-open = false; } }
+        Menu {
+            x: parent.width - self.width - 24px;
+            y: root.top-inset + 64px;
+            width: parent.width - 64px;
+            menu-background: Theme.is-dark ? Theme.palette-secondary : Theme.palette-surface;
+            // TODO: localize
+            if View.page == 0: MenuItem { label: "Restore Plan"; end-icon: Images.icon("upload", 24px); clicked => { root.menu-open = false; Actions.import-kit(); } }
+            if View.page == 0: MenuItem { label: "About Inheritance"; end-icon: Images.icon("info", 24px); divider: false; clicked => { root.menu-open = false; Actions.go(9); } }
+            if View.page == 11: MenuItem { label: "Export Encrypted Backup"; end-icon: Images.icon("download", 24px); clicked => { root.menu-open = false; Actions.go(7); } }
+            if View.page == 11: MenuItem { label: "Delete Plan"; end-icon: Images.icon("trash-2", 24px); destructive: true; divider: false; clicked => { root.menu-open = false; Actions.go(10); } }
+        }
+    }
+}
+export component AppWindow inherits Window {
+    title: "Inheritance";
+    preferred-width: UISize.screen-width;
+    preferred-height: UISize.screen-height;
+    background: Theme.palette-background;
+    AppContent { }
+}

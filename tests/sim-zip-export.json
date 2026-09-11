@@ -1,0 +1,10 @@
+[
+  {"tap":[230,490]}, {"wait":700},
+  {"input_text":"separate river lantern orchard"}, {"wait":700},
+  {"tap":[421,758]}, {"wait":700},
+  {"tap":[230,585]}, {"wait":700},
+  {"input_text":"separate river lantern orchard"}, {"wait":700},
+  {"tap":[421,758]}, {"wait":700},
+  {"tap":[240,746]}, {"wait":2000},
+  {"screenshot":"target/zip-final-folder.png"}
+]

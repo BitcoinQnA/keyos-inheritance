@@ -1,0 +1,1 @@
+[{"tap":[240,746]},{"wait":500},{"screenshot":"target/v3-rehearsal-requires-confirmation.png"},{"tap":[220,550]},{"wait":500},{"tap":[240,746]},{"wait":500},{"screenshot":"target/v3-rehearsal-step2.png"}]

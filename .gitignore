@@ -1,0 +1,10 @@
+target/
+.foundation-sdk/
+ui/ui
+manifest.toml
+__pycache__/
+screenshots/
+*.pem
+*.key
+.env
+.env.*

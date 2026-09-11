@@ -1,0 +1,13 @@
+[
+  {"tap":[240,746]}, {"wait":500},
+  {"screenshot":"target/sim-restore-cancelled.png"},
+  {"tap":[430,78]}, {"wait":400},
+  {"tap":[225,144]}, {"wait":600},
+  {"tap":[225,350]}, {"wait":400},
+  {"tap":[225,418]}, {"wait":600},
+  {"tap":[240,674]}, {"wait":600},
+  {"screenshot":"target/sim-restored.png"},
+  {"tap":[240,408]}, {"wait":500},
+  {"tap":[240,746]}, {"wait":500},
+  {"screenshot":"target/sim-review-blocked.png"}
+]

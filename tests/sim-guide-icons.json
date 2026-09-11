@@ -1,0 +1,86 @@
+[
+  {
+    "tap": [
+      240,
+      746
+    ]
+  },
+  {
+    "wait": 400
+  },
+  {
+    "screenshot": "target/icon-guide-fixed-2.png"
+  },
+  {
+    "tap": [
+      240,
+      746
+    ]
+  },
+  {
+    "wait": 400
+  },
+  {
+    "screenshot": "target/icon-guide-fixed-3.png"
+  },
+  {
+    "tap": [
+      240,
+      746
+    ]
+  },
+  {
+    "wait": 400
+  },
+  {
+    "screenshot": "target/icon-guide-fixed-4.png"
+  },
+  {
+    "tap": [
+      240,
+      746
+    ]
+  },
+  {
+    "wait": 400
+  },
+  {
+    "screenshot": "target/icon-guide-fixed-5.png"
+  },
+  {
+    "tap": [
+      52,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      52,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      52,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      52,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  }
+]

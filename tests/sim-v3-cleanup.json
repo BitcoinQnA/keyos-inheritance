@@ -1,0 +1,1 @@
+[{"tap":[220,578]},{"wait":500},{"screenshot":"target/v3-restored-assurances-cleared.png"},{"tap":[52,78]},{"wait":500},{"tap":[430,78]},{"wait":500},{"tap":[220,202]},{"wait":500},{"tap":[240,674]},{"wait":500},{"screenshot":"target/v3-originals-preserved.png"}]

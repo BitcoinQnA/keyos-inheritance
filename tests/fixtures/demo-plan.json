@@ -1,0 +1,22 @@
+{
+  "format": "passport-inheritance-kit-v1",
+  "plan": {
+    "version": 1,
+    "wallet_name": "Family Vault (demo)",
+    "descriptor": "wsh(sortedmulti(2,[4ba43603]tpubD6NzVbkrYhZ4Wgf68pWWfTRzdXMoepBvepfiAKtNoE7RvbAbWVfWzQxH1jbkfNk3iJ9zR65Yw6u3B2QZzpkMSTN4y8Lfm1t44HbpZX7efhZ/<0;1>/*,[8dfc9b34]tpubD6NzVbkrYhZ4Y3qD9tjwWFRv4AdyPdscx4wKXiywhgTXUeytmGtsEMiSJaXs9kqyYdPaKQv9tir5J2cDg2Fm3vaudETvLADYLLY4Vb7kMU4/<0;1>/*,[56c4fac3]tpubD6NzVbkrYhZ4XAhKE5b3VVtF4kipaPAEwhcF7e54zMkPoGh5C5rZFnpV4PMfB8gHhgqEK6hQZynZWbQWLiR2hhMohdfoBSzxG6NfD8F58rE/<0;1>/*))#xwnjd3zs",
+    "heir": "Alex Rivera",
+    "contact": "Sam — sam@example.com",
+    "message": "We practised this together. Take your time and ask Sam for help.",
+    "key_guidance": "Demo only:\n• Signer 1: home safe.\n• Signer 2: separate backup held by Sam.\n• Signer 3: Alex's device.\n\nMatch their fingerprints.",
+    "access_guidance": "A copy of this kit is with Sam. Arrange access to two signers using our separately stored instructions. No passwords are included here.",
+    "review_days": 90,
+    "last_reviewed": null,
+    "checklist": {
+      "keys_located": false,
+      "access_arranged": false,
+      "backup_shared": false,
+      "rehearsed": false
+    }
+  },
+  "guide": "INHERITANCE RECOVERY GUIDE\n\nWallet: Family Vault (demo)\nNetwork: Test network (not real bitcoin)\nFor: Alex Rivera\nContact: Sam — sam@example.com\n\n1. Find 2 of the 3 signing keys.\nFingerprints: 4BA43603, 8DFC9B34, 56C4FAC3\nDemo only:\n• Signer 1: home safe.\n• Signer 2: separate backup held by Sam.\n• Signer 3: Alex's device.\n\nMatch their fingerprints.\n\n2. Additional instructions (optional).\nA copy of this kit is with Sam. Arrange access to two signers using our separately stored instructions. No passwords are included here.\n\n3. Open the official Nunchuk app from https://nunchuk.io. Import the wallet descriptor below. Compare its network and first receive address before continuing.\n\n4. Connect enough supported hardware signers to meet the threshold. Follow Nunchuk's recovery instructions: https://resources.nunchuk.io/wallet-recovery/personal-wallet/\n\n5. Rehearse with the owner first. Never type seed words into a website or share them with support.\n\nMessage:\nWe practised this together. Take your time and ask Sam for help.\n\nFirst receive address:\ntb1qzvy8jvxw0rrqlll4xdugvwt54qcawncjgr4ecq9dc9w6azz6c0nqcnf2uh\n\nWallet descriptor:\nwsh(sortedmulti(2,[4ba43603]tpubD6NzVbkrYhZ4Wgf68pWWfTRzdXMoepBvepfiAKtNoE7RvbAbWVfWzQxH1jbkfNk3iJ9zR65Yw6u3B2QZzpkMSTN4y8Lfm1t44HbpZX7efhZ/<0;1>/*,[8dfc9b34]tpubD6NzVbkrYhZ4Y3qD9tjwWFRv4AdyPdscx4wKXiywhgTXUeytmGtsEMiSJaXs9kqyYdPaKQv9tir5J2cDg2Fm3vaudETvLADYLLY4Vb7kMU4/<0;1>/*,[56c4fac3]tpubD6NzVbkrYhZ4XAhKE5b3VVtF4kipaPAEwhcF7e54zMkPoGh5C5rZFnpV4PMfB8gHhgqEK6hQZynZWbQWLiR2hhMohdfoBSzxG6NfD8F58rE/<0;1>/*))#xwnjd3zs\n\nThis kit contains public wallet data and personal guidance. It contains no automatic release mechanism and is not a Nunchuk inheritance-service claim. Required keys must be obtained separately. A review date never changes the wallet's signing rules.\n"
+}

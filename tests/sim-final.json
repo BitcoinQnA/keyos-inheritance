@@ -1,0 +1,12 @@
+[
+  {"screenshot":"target/sim-final-welcome.png"},
+  {"tap":[430,78]}, {"wait":300},
+  {"screenshot":"target/sim-final-menu.png"},
+  {"tap":[225,144]}, {"wait":500},
+  {"tap":[225,350]}, {"wait":400},
+  {"tap":[225,418]}, {"wait":500},
+  {"tap":[240,674]}, {"wait":500},
+  {"tap":[240,500]}, {"wait":400},
+  {"tap":[240,582]}, {"wait":400},
+  {"screenshot":"target/sim-final-textarea.png"}
+]

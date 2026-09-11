@@ -1,0 +1,227 @@
+[
+  {
+    "tap": [
+      240,
+      674
+    ]
+  },
+  {
+    "wait": 600
+  },
+  {
+    "screenshot": "target/v2-third-deleted-two-retained.png"
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-0.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-1.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-2.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-3.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-4.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-5.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-6.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-7.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-8.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "tap": [
+      430,
+      78
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-menu-cycle-9.png"
+  },
+  {
+    "tap": [
+      240,
+      520
+    ]
+  },
+  {
+    "wait": 200
+  },
+  {
+    "screenshot": "target/v2-final-overview.png"
+  }
+]

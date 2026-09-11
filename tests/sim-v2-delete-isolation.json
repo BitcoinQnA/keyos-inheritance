@@ -1,0 +1,22 @@
+[
+  {"tap":[52,78]}, {"wait":300},
+  {"tap":[225,220]}, {"wait":300},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,202]}, {"wait":400},
+  {"screenshot":"target/v2-delete-first-confirm.png"},
+  {"tap":[240,746]}, {"wait":300},
+  {"tap":[52,78]}, {"wait":300},
+  {"screenshot":"target/v2-delete-cancelled-two-plans.png"},
+  {"tap":[225,220]}, {"wait":300},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,202]}, {"wait":300},
+  {"tap":[240,674]}, {"wait":500},
+  {"screenshot":"target/v2-delete-only-first.png"},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,138]}, {"wait":500},
+  {"tap":[225,350]}, {"wait":300},
+  {"tap":[225,418]}, {"wait":400},
+  {"tap":[240,674]}, {"wait":500},
+  {"tap":[52,78]}, {"wait":300},
+  {"screenshot":"target/v2-restore-keeps-reviewed-plan.png"}
+]

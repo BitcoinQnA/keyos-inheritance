@@ -1,0 +1,9 @@
+[
+  {"tap":[220,225]}, {"wait":700},
+  {"input_text":"Third Plan Test"}, {"wait":700},
+  {"tap":[430,78]}, {"wait":700},
+  {"tap":[240,746]}, {"wait":700},
+  {"screenshot":"target/v2-third-created-detail.png"},
+  {"tap":[52,78]}, {"wait":700},
+  {"screenshot":"target/v2-three-plans-created.png"}
+]

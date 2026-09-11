@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Foundation Devices, Inc. <hello@foundation.xyz>
+# SPDX-License-Identifier: MIT
+
+[package]
+name = "keyos-inheritance"
+version = "0.6.0"
+edition = "2021"
+
+[workspace]
+members = ["crates/inheritance-core"]
+exclude = [".foundation-sdk", "vendor/zip"]
+
+[dependencies]
+log = "0.4"
+log-server = { package = "xous-api-log", path = ".foundation-sdk/current/lib/keyos/xous/api/log" }
+server = { path = ".foundation-sdk/current/lib/keyos/server" }
+slint-keyos-platform = { path = ".foundation-sdk/current/lib/keyos/slint-keyos-platform/runtime" }
+foundation-themes = { path = ".foundation-sdk/current/lib/keyos/sdk/crates/foundation-themes" }
+fs = { path = ".foundation-sdk/current/lib/keyos/api/fs" }
+inheritance-core = { path = "crates/inheritance-core" }
+zeroize = { version = "1", features = ["alloc"] }
+
+[build-dependencies]
+slint-keyos-platform-build = { path = ".foundation-sdk/current/lib/keyos/slint-keyos-platform/build" }
+
+# Randomness is pre-wired: add `getrandom = "0.2"` (or `rand = "0.8"`) and calls
+# route to the TRNG on device. Stay on the getrandom 0.2 line; 0.3+ is uncovered.
+[patch.crates-io]
+getrandom = { path = ".foundation-sdk/current/lib/keyos/imports/getrandom" }

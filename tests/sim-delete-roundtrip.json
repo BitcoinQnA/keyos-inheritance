@@ -1,0 +1,15 @@
+[
+  {"tap":[225,650]}, {"wait":600},
+  {"screenshot":"target/sim-export-restorable.png"},
+  {"tap":[240,674]}, {"wait":500},
+  {"screenshot":"target/sim-roundtrip-restored.png"},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,270]}, {"wait":400},
+  {"screenshot":"target/sim-delete-confirm.png"},
+  {"tap":[240,746]}, {"wait":400},
+  {"screenshot":"target/sim-delete-cancelled.png"},
+  {"tap":[430,78]}, {"wait":300},
+  {"tap":[225,270]}, {"wait":400},
+  {"tap":[240,674]}, {"wait":500},
+  {"screenshot":"target/sim-deleted.png"}
+]

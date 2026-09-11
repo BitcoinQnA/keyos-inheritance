@@ -1,0 +1,67 @@
+import { AppContent } from "../ui/app.slint";
+import { Theme } from "@ui/theme.slint";
+import { View } from "../ui/globals.slint";
+export component Preview inherits Window {
+    width: 480px;
+    height: root.window-height * 1px;
+    in property <int> window-height: 800;
+    in property <int> page: 0;
+    in property <bool> dark: false;
+    in property <bool> populated: true;
+    in property <bool> long-text: false;
+    in property <bool> menu: false;
+    in property <int> setup: 0;
+    in property <int> rehearsal: 0;
+    init => { root.apply-state(); }
+    changed page => { root.apply-state(); }
+    changed dark => { root.apply-state(); }
+    changed populated => { root.apply-state(); }
+    changed long-text => { root.apply-state(); }
+    function apply-state() {
+        Theme.is-dark = root.dark;
+        Theme.palette-background = root.dark ? #231f20 : #ffffff;
+        Theme.palette-surface = root.dark ? #231f20 : #ffffff;
+        Theme.palette-card = root.dark ? #231f20 : #ffffff;
+        Theme.palette-foreground = root.dark ? #ffffff : #231f20;
+        Theme.palette-muted = root.dark ? #b7b6b7 : #767476;
+        Theme.palette-border = root.dark ? #5a595a : #d5d4d5;
+        View.page = root.page;
+        View.title = ["Plans", "Import Wallet", "Wallet Details", "Recovery Plan", "Find the Keys", "Review Details", "Heir Guidance", "Export Recovery Kit", "Restore Plan", "About", "Delete Plan", "Plan Details", "Set Up Your Plan", "Signing Keys", "Signing Key", "Heir Guidance", "Practise Together", "Check Your Plan", "Unlock Backup", "Handover Arrangements"][root.page];
+        View.setup-step = root.setup;
+        View.rehearsal-step = root.rehearsal;
+        View.handover-checks = [false, true, false, false];
+        View.handover-status = "1 of 4 arrangements confirmed";
+        View.rehearsal-title = "Check the wallet together";
+        View.rehearsal-body = "Open the public wallet configuration in Nunchuk. Compare its network and first receive address with this plan. This is your confirmation, not proof of recoverability.";
+        View.signer-names = ["Home Passport", "Executor backup", "Third key"];
+        View.signer-summaries = ["4BA43603\nLocation and access recorded", "8DFC9B34\nInstructions needed", "56C4FAC3\nInstructions needed"];
+        View.signer-fingerprint = "4BA43603";
+        View.signer-fields = ["Home Passport", "In the home safe. Ask the trusted contact to help find the correct device and its separate instructions.", "Ask Sam for access. Never put seed words, passwords or PINs in this plan."];
+        View.fields = ["Family Vault", "Alex Rivera", "Sam — sam@example.com", "A personal note", "Additional legacy instructions stay here.", "Ask the executor for the separate kit."];
+        View.export-status = "Your backup copy is out of date.";
+        View.revision = "Revision 3 · 2026-09-08 UTC";
+        View.completeness = "You need 2 signing keys; only 1 has both location and access instructions.";
+        View.rehearsal-status = "No rehearsal recorded for these instructions";
+        View.has-plan = root.populated;
+        View.wallet-name = root.long-text ? "A family wallet with a very long name that should always wrap inside its card" : "Family Vault";
+        View.plan-names = [View.wallet-name, "Business Wallet"];
+        View.plan-summaries = ["For Alex Rivera\nNot reviewed yet", "For Sam\nReview in 90 days"];
+        View.wallet-summary = "2 of 3 signing keys required\nTest network (not real bitcoin)";
+        View.fingerprints = "4BA43603\n8DFC9B34\n56C4FAC3";
+        View.address = "tb1qaxjklsgdkhfwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvb";
+        View.heir = "For Alex Rivera";
+        View.status = "Review in 90 days";
+        View.readiness = "Rehearsal still needed";
+        View.field-index = 4;
+        View.field-multiline = true;
+        View.field-help = "Explain where each signer or backup is kept. Identify them by fingerprint. Do not enter seed words. Up to 1600 characters.";
+        View.edit-value = root.long-text ? "Signer one is in the safe. Signer two is kept separately with the executor. Please contact the trusted contact named in this plan to arrange access to each signer. Compare the wallet and key fingerprints before proceeding. Keep all passwords separate." : "Signer one: home safe. Signer two: with Sam.";
+        View.guide-title = "Find the signing keys";
+        View.guide-step = 1;
+        View.guide-headings = ["Normal access", "Inheritance access", "When inheritance is available", "Home signing device"];
+        View.guide-details = ["Use 2 of 3 normal keys. This path remains available before and after the inheritance timelock.", "Use 1 of 3 inheritance keys once the timelock is satisfied.", "Timelock date: 2026-09-26 UTC.\n\nEligibility uses blockchain median time, not this device's clock.\n\nNunchuk must check blockchain eligibility. This app does not unlock funds.", "Normal key\nFingerprint: 4BA43603\n\nLocation\nHome safe\n\nHow to access\nAsk the trusted contact for the separate instructions."];
+        View.rehearsal-key-headings = View.guide-headings;
+        View.rehearsal-key-details = View.guide-details;
+    }
+    AppContent { menu-open: root.menu; }
+}
